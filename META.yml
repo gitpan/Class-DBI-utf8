@@ -1,0 +1,18 @@
+---
+name: Class-DBI-utf8
+version: 0.1
+author:
+  - Tom Insam <tinsam@fotango.com>
+abstract: A Class:::DBI subclass that knows about UTF8
+license: perl
+requires:
+  Class::DBI: 0.94
+  perl: 5.008
+build_requires:
+  DBD::SQLite: 0
+  Test::More: 0
+provides:
+  Class::DBI::utf8:
+    file: lib/Class/DBI/utf8.pm
+    version: 0.1
+generated_by: Module::Build version 0.2611
