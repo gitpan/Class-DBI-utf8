@@ -7,7 +7,7 @@ my $build = Module::Build->new(
   license     => 'perl',
   requires    => {
     'perl' => 5.008,
-    'Class::DBI' => '0.94',
+    'Class::DBI' => '0', # not really, but I can't get M::B to do the Right Thing here
   },
   build_requires => {
     'DBD::SQLite'  => 0,

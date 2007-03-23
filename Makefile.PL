@@ -9,7 +9,7 @@ WriteMakefile
           'PREREQ_PM' => {
                            'Test::More' => 0,
                            'DBD::SQLite' => 0,
-                           'Class::DBI' => '0.94'
+                           'Class::DBI' => '0'
                          }
         )
 ;

@@ -15,13 +15,16 @@ use base qw( Class::DBI );
 use Class::DBI::utf8;
 
 __PACKAGE__->set_db( Main => "dbi:SQLite:$db", "", "");
-__PACKAGE__->columns( All => qw( id text ));
+__PACKAGE__->columns( All => qw( id text binary ));
+
+__PACKAGE__->utf8_columns(qw( id text ));
 
 # set up the testing table
 __PACKAGE__->db_Main->do("
   CREATE TABLE testing (
     id INT NOT NULL,
-    text TEXT
+    text TEXT,
+    binary TEXT
   )
 ");
 
@@ -84,6 +87,11 @@ is( Testing->search( text => "\x{2264}" ), 1, "got row from search" );
 # subclasses of a utf8 class
 ok( Testing2->create({ id => 2, text => "\x{e9}" }), "create subclass" );
 is( Testing2->search( text => "\x{e9}" ), 1, "got row from search" );
+
+# it's possible to have non-utf8 columns
+ok( Testing->create({ id => 3, text => "\x{2264}", binary => "\x{2264}" }) );
+is( Testing->retrieve(3)->text, "\x{2264}", "text column is text" );
+is( Testing->retrieve(3)->binary, "\342\211\244", "binary column is binary" );
 
 
 # useful function
